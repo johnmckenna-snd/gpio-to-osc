@@ -1,0 +1,29 @@
+user nginx;
+worker_processes auto;
+
+events {
+  worker_connections 4096;
+}
+
+http {
+  upstream appserver {
+    keepalive 100;
+    server server:4000;
+  }
+
+  server {
+    listen 80;
+
+    location / {
+      root /web;
+      index index.html index.htm;
+      try_files $uri $uri/ /index.html =404;
+    }
+
+    location /api/ {
+      # must have / at the end for nginx to know
+      # that it's a redirect.
+      proxy_pass http://appserver/;
+    }
+  }
+}

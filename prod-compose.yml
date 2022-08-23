@@ -1,0 +1,40 @@
+version: '3.7'
+
+networks:
+  main:
+    name: gpio-to-osc
+    driver: bridge
+
+services:
+  website:
+    container_name: gpio-to-osc-website
+    build:
+      context: ./website
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - server
+    networks:
+      - main
+    restart: always
+    volumes:
+      - './website/nginx/nginx.conf:/etc/nginx/nginx.conf:ro'
+      - './website/nginx/default.conf.template:/etc/nginx/templates/default.conf.template'
+
+  server:
+    container_name: gpio-to-osc-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - OSC_CONFIG_FILE_PATH=/app/config/oscConfig.json
+      - GPIO_PORT_NUMBER
+      - GPIO_ROOT
+    networks:
+      - main
+    restart: always
+    volumes:
+      - ./server/config:/app/config
+      - /sys/class/gpio:/sys/class/gpio
+    privileged: true

@@ -1,0 +1,22 @@
+{ // if this is pissing you off run npm start with env: DISABLE_ESLINT_PLUGIN=true
+  "extends": ["react-app", "airbnb", "airbnb/hooks", "plugin:react/jsx-runtime"],
+  "rules": { // off = 0, warn = 1, error = 2
+    "react/function-component-definition": [2,
+      {
+        "namedComponents": "function-declaration",
+        "unnamedComponents": "arrow-function" 
+        }
+      ],
+    "space-before-function-paren": ["error", "always"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": 1,
+    "object-curly-newline": ["error", {"multiline": true}],
+    "react/jsx-no-bind": [1, {
+      "ignoreDOMComponents": true
+    }],
+    "max-len": 1,
+    "quotes": ["error", "single", {
+      "allowTemplateLiterals": true
+    }]
+  }
+}

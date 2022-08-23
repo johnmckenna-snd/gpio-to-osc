@@ -1,0 +1,30 @@
+{
+  "name": "gpio-to-osc",
+  "version": "1.0.0",
+  "description": "sends osc on gpio open/close events",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo no test",
+    "start": "node server.js",
+    "dev": "nodemon --ignore ./config/oscConfig.json server.js",
+    "lint": "eslint ."
+  },
+  "author": "john mckenna",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chalk": "^2.4.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.6.0",
+    "epoll": "^4.0.1",
+    "express": "^4.17.1",
+    "osc-js": "^2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "nodemon": "^2.0.7"
+  }
+}
